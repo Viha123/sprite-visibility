@@ -1,5 +1,4 @@
 // tests go here; this will not be compiled when this package is used as an extension.
-// tests go here; this will not be compiled when this package is used as an extension.
 let mySprite = sprites.create(img`
     . . . . . . f f f f . . . . . . 
     . . . . f f f 2 2 f f f . . . . 
@@ -22,6 +21,15 @@ tiles.setCurrentTilemap(tilemap`level2`)
 controller.moveSprite(mySprite)
 sprite_visibility.setTileMap(tilemap`level2`);
 scene.cameraFollowSprite(mySprite)
+let off = true;
+
 forever(function () {
-    sprite_visibility.coverAroundSpriteTileMap(mySprite, 1)
+    if(off) {
+        sprite_visibility.coverAroundSpriteTileMap(mySprite, 1)
+    } else {
+        sprite_visibility.resetTileMap();
+    }
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
+    off = !off;
 })
