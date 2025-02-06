@@ -46,8 +46,8 @@ namespace sprite_visibility {
         let spriteCol = Math.floor(spriteX2 / pixelXSize);
         let a = screen.width;
         let i = screen.height;
-        for (let s = spriteRow - 4; s < spriteRow + 5; s++) {
-            for (let d = spriteCol - 5; d < spriteCol + 6; d++) {
+        for (let s = spriteRow - 8; s < spriteRow + 8; s++) {
+            for (let d = spriteCol - 10; d < spriteCol + 10; d++) {
                 if (Math.abs(s - spriteRow) > visibileTile || Math.abs(d - spriteCol) > visibileTile) {
                     tiles.setTileAt(tiles.getTileLocation(d, s), img`
 f f f f f f f f f f f f f f f f 
@@ -81,6 +81,16 @@ f f f f f f f f f f f f f f f f
         tmapd = tm;
         currentTileSet = tm.getTileset();
     }
+
+    //% block
+    export function resetTileMap() {
+        for(let t = 0; t < game.currentScene().tileMap.data.height; t ++) {
+            for (let e = 0; e < game.currentScene().tileMap.data.width; e ++) {
+                tiles.setTileAt(tiles.getTileLocation(e, t), currentTileSet[tmapd.getTile(e, t)]);
+            }
+        }
+    }
+    
 
     // note that Caml casing yields lower case
     // block text with spaces
